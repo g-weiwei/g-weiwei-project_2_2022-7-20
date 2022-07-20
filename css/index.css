@@ -1,0 +1,81 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+#swiper {
+  position: relative;
+}
+.swiper {
+  width: 1000px;
+  height: 550px;
+  /* background-color: yellowgreen; */
+  margin: 0 auto;
+}
+.swiperitem img {
+  width: 1000px;
+  height: 600px;
+}
+.swiperitem {
+  position: absolute;
+  width: 1000px;
+  height: 600px;
+  transition: 1s;
+  box-shadow: 0px 0px 15px black;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.def {
+  opacity: 0;
+  z-index: -1;
+  transform: perspective(500px) translateZ(-250px);
+}
+
+.c {
+  opacity: 1;
+  z-index: 1;
+  transform: perspective(500px) translateZ(-200px) translateX(330px);
+}
+.a {
+  opacity: 1;
+  z-index: 1;
+  transform: perspective(500px) translateZ(-200px) translateX(-330px);
+}
+.b {
+  opacity: 1;
+  z-index: 2;
+  transform: perspective(500px) translateZ(-130px) translateX(0px);
+}
+.btn {
+  position: absolute;
+  width: 22px;
+  height: 33px;
+  top: 41%;
+
+  z-index: 3;
+}
+.rightbtn {
+  right: 0;
+}
+
+.leftbtn {
+  left: 0;
+}
+.points {
+  height: 10px;
+  width: 200px;
+  margin: 0 auto;
+  /* border: 1px solid seagreen; */
+  display: flex;
+  justify-content: space-around;
+}
+.points a {
+  width: 15px;
+  height: 9px;
+  background-color: rgb(163, 163, 163);
+}
+.points .show {
+  background-color: red;
+}
+.points .hidden {
+  background-color: rgb(163, 163, 163);
+}

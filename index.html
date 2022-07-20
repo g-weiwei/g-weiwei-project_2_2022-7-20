@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>轮播图</title>
+    <link rel="stylesheet" href="./css/index.css" />
+    <script src="./js/index.js"></script>
+  </head>
+  <body>
+    <div id="swiper">
+      <div class="swiper">
+        <div class="swiperitem b">
+          <a href="#"><img src="./image/a000000.jpg" alt="" /></a>
+        </div>
+        <div class="swiperitem c">
+          <a href="#"><img src="./image/a11111 (3).jpg" alt="" /></a>
+        </div>
+        <div class="swiperitem def">
+          <a href="#"><img src="./image/a222222(2).jpg" alt="" /></a>
+        </div>
+        <div class="swiperitem def">
+          <a href="#"><img src="./image/a3333 (4).jpg" alt="" /></a>
+        </div>
+        <div class="swiperitem def">
+          <a href="#"><img src="./image/a44444.jpg" alt="" /></a>
+        </div>
+        <div class="swiperitem a">
+          <a href="#"><img src="./image/毕业照111.jpg" alt="" /></a>
+        </div>
+      </div>
+      <a href="#" class="btn leftbtn"><img src="./image/left.png" alt="" /></a>
+
+      <a href="#" class="btn rightbtn"
+        ><img src="./image/reght.png" alt=""
+      /></a>
+      <div class="points">
+        <a href="#" class="show"></a>
+        <a href="#" class="hidden"></a>
+        <a href="#" class="hidden"></a>
+        <a href="#" class="hidden"></a>
+        <a href="#" class="hidden"></a>
+        <a href="#" class="hidden"></a>
+      </div>
+    </div>
+    <script>
+      // 1.图片自动轮转-0--------------------------------------------------------------------------------
+
+      var imgarr = document.querySelectorAll(".swiperitem"); //图片元素数组
+      var indexbtn = document.querySelectorAll(".points a"); //导航按钮元素数组
+      var leftbtn = document.querySelector(".leftbtn");
+      var swiper = document.querySelector("#swiper");
+      var rightbtn = document.querySelector(".rightbtn");
+      var nowindex = 0;
+      var timer;
+
+      //切换图片函数
+      function changeimg() {
+        console.log(nowindex);
+        for (var i = 0; i < imgarr.length; i++) {
+          imgarr[i].classList = "swiperitem def";
+        }
+
+        if (nowindex === 0) {
+          imgarr[nowindex].classList = "swiperitem b";
+          imgarr[nowindex + 1].classList = "swiperitem c";
+          imgarr[5].classList = "swiperitem a";
+        } else if (nowindex === 5) {
+          imgarr[0].classList = "swiperitem c";
+          imgarr[nowindex].classList = "swiperitem b";
+          imgarr[nowindex - 1].classList = "swiperitem a";
+        } else {
+          imgarr[nowindex].classList = "swiperitem b";
+          imgarr[nowindex + 1].classList = "swiperitem c";
+          imgarr[nowindex - 1].className = "swiperitem a";
+        }
+      }
+      // 3.图片和按钮链接
+      //按钮切换函数
+      function changeib() {
+        for (var i = 0; i < indexbtn.length; i++) {
+          indexbtn[i].classList = "hidden";
+        }
+
+        indexbtn[nowindex].classList = "show";
+      }
+      //定时器函数切换图片
+      function swiperplay() {
+        timer = setInterval(function () {
+          nowindex++;
+          nowindex = nowindex % 6;
+          changeall();
+        }, 1000);
+      }
+      function changeall() {
+        changeimg();
+        changeib();
+      }
+      // 2.按钮切换图片----------------------------------------------------------------------------
+      for (var i = 0; i < indexbtn.length; i++) {
+        indexbtn[i].index = i;
+        indexbtn[i].addEventListener("click", function () {
+          nowindex = this.index;
+          changeall();
+        });
+      }
+
+      //5.悬浮停止开启
+      swiper.onmouseover = function () {
+        clearInterval(timer);
+      };
+      swiper.onmouseout = function () {
+        swiperplay();
+      };
+      // 4，左右按钮切换图片
+      rightbtn.addEventListener("click", function (e) {
+        nowindex++;
+        if (nowindex === imgarr.length - 1) {
+          nowindex = 0;
+        }
+        changeall();
+      });
+      leftbtn.addEventListener("click", function () {
+        nowindex--;
+        if (nowindex === 0) {
+          nowindex = imgarr.length - 1;
+        }
+        changeall();
+      });
+      //小图片点击切换
+      for (var i = 0; i < imgarr.length; i++) {
+        imgarr[i].index = i;
+        imgarr[i].addEventListener("click", function () {
+          nowindex = this.index;
+          changeall();
+        });
+      }
+    </script>
+  </body>
+</html>
